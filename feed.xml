@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lyc</title>
+    <description>A programming language work-in-progress.
+</description>
+    <link>http://bloff.github.com/lyc//</link>
+    <atom:link href="http://bloff.github.com/lyc//feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Thu, 03 Sep 2015 21:10:28 +0200</pubDate>
+    <lastBuildDate>Thu, 03 Sep 2015 21:10:28 +0200</lastBuildDate>
+    <generator>Jekyll v2.2.0</generator>
+    
+      <item>
+        <title>Lexing II: readtable–macro parsing</title>
+        <description>
+        </description>
+        <pubDate>Sun, 30 Aug 2015 02:00:00 +0200</pubDate>
+        <link>http://bloff.github.com/lyc/lexing,/syntax/2015/08/30/lexer-2.html</link>
+        <guid isPermaLink="true">http://bloff.github.com/lyc/lexing,/syntax/2015/08/30/lexer-2.html</guid>
+        
+        
+        <category>lexing,</category>
+        
+        <category>syntax</category>
+        
+      </item>
+    
+      <item>
+        <title>Lexing I: the off-side rule</title>
+        <description>
+        </description>
+        <pubDate>Sun, 02 Aug 2015 02:00:00 +0200</pubDate>
+        <link>http://bloff.github.com/lyc/2015/08/02/lexer.html</link>
+        <guid isPermaLink="true">http://bloff.github.com/lyc/2015/08/02/lexer.html</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>

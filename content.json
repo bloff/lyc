@@ -1,0 +1,28 @@
+{
+  "address": "1PkTiSpMwpTt9masqRWaufFHu8DFMmamcM", 
+  "description": "", 
+  "domain": "lyc.bit", 
+  "files": {
+    "content.json~": {
+      "sha512": "da012f0fd55e400baa3d3f9e5ee38fae5ee575cd8f14f1e0438e8437fd6228c0", 
+      "size": 952
+    }, 
+    "index.html": {
+      "sha512": "06492b4222857fd3584a88f15c0371d568e953a79ea6181b301a0aaa8b59c7a8", 
+      "size": 41
+    }
+  }, 
+  "ignore": "", 
+  "modified": 1436447838.997468, 
+  "sign": [
+    58772081469500071163085770911753394917282883986154941006859924841158233076484, 
+    69763794039351330901925064314565178859164804124400136335957196891931472555944
+  ], 
+  "signers_sign": "G1oJvawt1gVAkqqeHcYOxjOzTN1heR3/WT1uanmhw4DxMCoDADcTDd5mhDvTBZSgjeWkQAOBCmOV4c3u0LWVD8c=", 
+  "signs": {
+    "1PkTiSpMwpTt9masqRWaufFHu8DFMmamcM": "HLyrhZ8uA3ZSJAhRRRRoETxd3Fz8QWvSYQzxCJVrKuDj2Du+LRtWMYqIs7gH5tC1GkPdYKm/liSt8j4X7wyQ1Q8="
+  }, 
+  "signs_required": 1, 
+  "title": "lyc",
+  "zeronet_version": "0.3.1"
+}
