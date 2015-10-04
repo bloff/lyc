@@ -281,9 +281,9 @@ END
 <div class="highlight"><pre><code><span class="k">test</span> <span class="s">“</span><span class="s">lexing</span><span class="s">”</span>
     <span class="">of</span> <span class="">readtable-macro</span>
     <span class="">tokenizer</span>
-    <span class="c">#</span> <span class="c">yeah!
-      also-with</span>
-    <span class="s">“</span><span class="s">off-side rule
+    <span class="c">#</span><span class="c"> yeah!
+      also-with
+    </span><span class="s">“</span><span class="s">off-side rule
      for strings
      and comments</span><span class="s">”</span>
 </code></pre></div>
@@ -292,7 +292,7 @@ END
 <div class="footnotes">
   <ol>
     <li id="fn:visual-column">
-      <p>We will someday blog about characters; suffice to say that the visual column of <code>e</code> is 5 in the string <code>abcde</code>, and 6 in the string <code>ab→de</code>. By the way, if the right-arrow symbol <code>→</code> does not appear to have length 2 in your browser, try using a later version, the appropriate font should be loaded together with this website. <a href="#fnref:visual-column" class="reversefootnote">&#8617;</a></p>
+      <p>We will someday blog about characters; suffice to say that the visual column of <code>e</code> is 5 in the string <code>abcde</code>, and 6 in the string <code>abde</code>. By the way, if the right-arrow symbol <code></code> does not appear in your browser (if it appears garbled), try using a later version, the appropriate font should be loaded together with this website. <a href="#fnref:visual-column" class="reversefootnote">&#8617;</a></p>
     </li>
     <li id="fn:relative-column">
       <p>The relative-column number is the column number of the read character, where the number is measured relative to the characters that were <code>read</code>. The column-number of the character, relative to the file where it has originated, may be different. <a href="#fnref:relative-column" class="reversefootnote">&#8617;</a></p>
@@ -308,6 +308,15 @@ END
 <!--<div class="related">-->
 <!--<h2>Related Posts</h2>-->
 <!--<ul class="related-posts">-->
+<!---->
+<!--<li>-->
+<!--<h3>-->
+<!--<a href="/2015/10/04/lexer-3.html">-->
+<!--Lexing III: More power!-->
+<!--<small>04 Oct 2015</small>-->
+<!--</a>-->
+<!--</h3>-->
+<!--</li>-->
 <!---->
 <!--<li>-->
 <!--<h3>-->

@@ -17,82 +17,82 @@
 
     <title>
         
-        Blog &middot; Lyc
+        Lexing III: More power! &middot; Lyc
         
     </title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="../css/poole.css">
-    <link rel="stylesheet" href="../css/syntax.css">
-    <link rel="stylesheet" href="../css/blackdoc.css">
+    <link rel="stylesheet" href="../../../css/poole.css">
+    <link rel="stylesheet" href="../../../css/syntax.css">
+    <link rel="stylesheet" href="../../../css/blackdoc.css">
     <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">-->
     <!--<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=EB+Garamond">-->
     <!-- Icons -->
-    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../public/apple-touch-icon-144-precomposed.png">-->
-    <!--<link rel="shortcut icon" href="../public/favicon.ico">-->
+    <!--<link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../../public/apple-touch-icon-144-precomposed.png">-->
+    <!--<link rel="shortcut icon" href="../../../public/favicon.ico">-->
 
     <!-- Load jQuery -->
-    <script src="../js/jquery-2.1.4.min.js"></script>
+    <script src="../../../js/jquery-2.1.4.min.js"></script>
     <!-- Load KaTeX -->
-    <link rel="stylesheet" href="../js/katex/katex.min.css">
-    <script src="../js/katex/katex.min.js"></script>
+    <link rel="stylesheet" href="../../../js/katex/katex.min.css">
+    <script src="../../../js/katex/katex.min.js"></script>
 
     <style>
         @font-face {
             font-family: 'lyc source code';
             font-weight: normal;
-            src: url("../fonts/LycSourceCode.ttf.woff") format('woff');
+            src: url("../../../fonts/LycSourceCode.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: normal;
-            src: url("../fonts/SourceSansPro-Regular.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-Regular.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: normal;
             font-style: italic;
-            src: url("../fonts/SourceSansPro-It.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-It.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: 100;
-            src: url("../fonts/SourceSansPro-Light.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-Light.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: 100;
             font-style: italic;
-            src: url("../fonts/SourceSansPro-LightIt.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-LightIt.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: bold;
-            src: url("../fonts/SourceSansPro-Bold.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-Bold.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Sans Pro';
             font-weight: bold;
             font-style: italic;
-            src: url("../fonts/SourceSansPro-BoldIt.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSansPro-BoldIt.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Serif Pro';
             font-weight: bold;
-            src: url("../fonts/SourceSerifPro-Bold.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSerifPro-Bold.ttf.woff") format('woff');
         }
 
         @font-face {
             font-family: 'Source Serif Pro';
             font-weight: normal;
-            src: url("../fonts/SourceSerifPro-Regular.ttf.woff") format('woff');
+            src: url("../../../fonts/SourceSerifPro-Regular.ttf.woff") format('woff');
         }
 
     </style>
@@ -122,7 +122,7 @@
             <a class="sidebar-nav-item" href="http://bloff.github.io/lyc/">About</a>
 
             <!---->
-            <!--/blog/index.html-->
+            <!--/2015/10/04/lexer-3.html-->
 
             
 
@@ -130,7 +130,7 @@
             
             
             
-            <a class="sidebar-nav-item active"
+            <a class="sidebar-nav-item"
                href="http://bloff.github.io/lyc/blog/index.html">Blog</a>
             
             
@@ -165,22 +165,9 @@
 
 
     <div class="content container">
-      <div class="page">
-  <!--<h1 class="page-title">Blog</h1>-->
-  <!-- _includes/base.html -->
-
-<div class="headline">
-I aim to post every fourth Sunday (at least).
-</div>
-
-<div class="post">
-
-  <header class="post-header">
+      <div class="post">
     <h1 class="post-title">Lexing III: More power!</h1>
-    <p class="post-meta">Oct 4, 2015</p>
-  </header>
-
-  <article class="post-content">
+    <span class="post-date">04 Oct 2015</span>
     <h3 id="string-interpolation-via-recursive-descent">String interpolation via recursive descent</h3>
 
 <p>The beauty of a recursive-descent parser is that certain constructions are very natural and easy to implement. Take string interpolation, for instance:</p>
@@ -308,13 +295,33 @@ I aim to post every fourth Sunday (at least).
 </code></pre></div>
 
 
-  </article>
-
 </div>
 
-<p><a href="../blog/list.html">List of previous posts</a></p>
+<!--<div class="related">-->
+<!--<h2>Related Posts</h2>-->
+<!--<ul class="related-posts">-->
+<!---->
+<!--<li>-->
+<!--<h3>-->
+<!--<a href="/lexing,/syntax/2015/08/30/lexer-2.html">-->
+<!--Lexing II: readtable–macro parsing-->
+<!--<small>30 Aug 2015</small>-->
+<!--</a>-->
+<!--</h3>-->
+<!--</li>-->
+<!---->
+<!--<li>-->
+<!--<h3>-->
+<!--<a href="/2015/08/02/lexer.html">-->
+<!--Lexing I: the off-side rule-->
+<!--<small>02 Aug 2015</small>-->
+<!--</a>-->
+<!--</h3>-->
+<!--</li>-->
+<!---->
+<!--</ul>-->
+<!--</div>-->
 
-</div>
 
     </div>
 

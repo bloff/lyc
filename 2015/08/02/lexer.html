@@ -187,25 +187,25 @@ We expect the number of blocks to be proportional to the number of lines in the 
 <div class="highlight"><pre><code><span class="">S</span> <span class="">:=</span> <span class="kt">Int</span><span class="p">[</span><span class="p">]</span>
 <span class="">S</span><span class="">.</span><span class="">push</span><span class="p">(</span><span class="">0</span><span class="p">)</span>
 
-<span class="k">while</span> <span class="k">not</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
+<span class="k">while</span> <span class="k">not</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span>:
     <span class="">N</span> <span class="">:=</span> <span class="">count-number-of-whitespaces</span><span class="p">(</span><span class="p">)</span>
 
-    <span class="c">#</span> <span class="c">Emit INDENT/DEDENT tokens as appropriate</span>
-    <span class="k">if</span> <span class="">N</span> <span class="">&gt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span><span class="">:</span>
+    <span class="c">#</span><span class="c"> Emit INDENT/DEDENT tokens as appropriate
+    </span><span class="k">if</span> <span class="">N</span> <span class="">&gt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span>:
         <span class="">S</span><span class="">.</span><span class="">append</span><span class="p">(</span><span class="">N</span><span class="p">)</span>
         <span class="nb">emit</span> <span class="">INDENT</span>
-    <span class="k">elif</span> <span class="">N</span> <span class="">&lt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span><span class="">:</span>
-        <span class="k">while</span> <span class="">N</span> <span class="">&lt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span><span class="">:</span>
+    <span class="k">elif</span> <span class="">N</span> <span class="">&lt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span>:
+        <span class="k">while</span> <span class="">N</span> <span class="">&lt;</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span>:
             <span class="">pop</span><span class="p">(</span><span class="">S</span><span class="p">)</span>
             <span class="nb">emit</span> <span class="">DEDENT</span>
-        <span class="k">if</span> <span class="">N</span> <span class="">≠</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span><span class="">:</span>
+        <span class="k">if</span> <span class="">N</span> <span class="">≠</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span>:
             <span class="k">raise</span> <span class="">«Indentation Error»</span>
     <span class="k">assert</span> <span class="">N</span> <span class="">=</span> <span class="">top</span><span class="p">(</span><span class="">S</span><span class="p">)</span>
 
-    <span class="c">#</span> <span class="c">Feed the remaining characters to the compiled regexps,
+    <span class="c">#</span><span class="c"> Feed the remaining characters to the compiled regexps,
       which may in turn emit various tokens; we capture
-      these tokens and emit them</span>
-    <span class="k">while</span> <span class="p">(</span><span class="">char</span> <span class="">:=</span> <span class="nb">read</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="">≠</span> <span class="">'</span><span class="">\</span><span class="">n</span><span class="">'</span><span class="">:</span>
+      these tokens and emit them
+    </span><span class="k">while</span> <span class="p">(</span><span class="">char</span> <span class="">:=</span> <span class="nb">read</span><span class="p">(</span><span class="p">)</span><span class="p">)</span> <span class="">≠</span> <span class="">'</span><span class="">\</span><span class="">n</span><span class="">'</span>:
         <span class="nb">yield</span> <span class="">char</span>
 
 
@@ -227,66 +227,66 @@ We expect the number of blocks to be proportional to the number of lines in the 
 
 <p>In case you are wondering, the precise and only difference between chain-of-couroutines and the usual recursive-descent parsing is that the caller controls what is seen by the callee, rather than just completely delegating the processing of the characters.</p>
 
-<p><img src="images/lexing_chain.svg" width="100%" alt="Illustration of lexing via a chain of coroutines." title="Illustration of lexing via a chain of coroutines." /></p>
+<p><img src="/blog/images/lexing_chain.svg" width="100%" alt="Illustration of lexing via a chain of coroutines." title="Illustration of lexing via a chain of coroutines." /></p>
 
 <h2 id="an-example">An example</h2>
 
 <p>We now show some pseudo-code that uses this idea to parse indented blocks of identifiers (sequences of alphanumeric characters). The algorithm will serve as the foundation for a very powerful method of lexical analysis, which we will describe in our next post. It is a bit harder to grasp what is going on, and the algorithm is potentially slower<sup id="fnref:slower"><a href="#fn:slower" class="footnote">2</a></sup>. But I personally find the end result to be conceptually quite elegant, and I think this will shine through when we later extend it.</p>
 
-<div class="highlight"><pre><code><span class="c">#</span> <span class="c">This coroutine parses a 'block-seq', which is a sequence
+<div class="highlight"><pre><code><span class="c">#</span><span class="c"> This coroutine parses a 'block-seq', which is a sequence
   of blocks of identifiers
 
   Each block in the sequence is of the form:
       sequence of identifiers
          (indented, possibly empty) block-seq
-</span>
-<span class="k">coroutine</span> <span class="">parse-block-seq</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
-    <span class="k">loop</span><span class="">:</span>
-        <span class="c">#</span> <span class="c">Each cycle through this loop parses a single block</span>
-        <span class="">skip-empty-lines</span><span class="p">(</span><span class="p">)</span>
-        <span class="k">if</span> <span class="">first-non-empty-line-is-indented</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
+
+</span><span class="k">coroutine</span> <span class="">parse-block-seq</span><span class="p">(</span><span class="p">)</span>:
+    <span class="k">loop</span>:
+        <span class="c">#</span><span class="c"> Each cycle through this loop parses a single block
+        </span><span class="">skip-empty-lines</span><span class="p">(</span><span class="p">)</span>
+        <span class="k">if</span> <span class="">first-non-empty-line-is-indented</span><span class="p">(</span><span class="p">)</span>:
             <span class="k">raise</span> <span class="">«Unexpected Indentation»</span>
-        <span class="k">elif</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span><span class="">:</span> <span class="k">return</span>
+        <span class="k">elif</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span>: <span class="k">return</span>
 
 
-        <span class="c">#</span> <span class="c">Stage I: Parse the first sequence of identifiers</span>
-        <span class="k">loop</span><span class="">:</span>
-            <span class="k">if</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span><span class="">:</span> <span class="k">return</span>
+        <span class="c">#</span><span class="c"> Stage I: Parse the first sequence of identifiers
+        </span><span class="k">loop</span>:
+            <span class="k">if</span> <span class="">EOF</span><span class="p">(</span><span class="p">)</span>: <span class="k">return</span>
             <span class="">char</span> <span class="">:=</span> <span class="nb">read</span><span class="p">(</span><span class="p">)</span>
-            <span class="k">if</span> <span class="">char</span><span class="">.</span><span class="">is-whitespace</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
-                <span class="">pass</span> <span class="c">#</span> <span class="c">ignore non-beginning of line whitespace</span>
-            <span class="k">elif</span> <span class="">char</span><span class="">.</span><span class="">is-newline</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
-                <span class="">break</span> <span class="c">#</span> <span class="c">move on Stage II</span>
-            <span class="k">else</span><span class="">:</span>
+            <span class="k">if</span> <span class="">char</span><span class="">.</span><span class="">is-whitespace</span><span class="p">(</span><span class="p">)</span>:
+                <span class="">pass</span> <span class="c">#</span><span class="c"> ignore non-beginning of line whitespace
+            </span><span class="k">elif</span> <span class="">char</span><span class="">.</span><span class="">is-newline</span><span class="p">(</span><span class="p">)</span>:
+                <span class="">break</span> <span class="c">#</span><span class="c"> move on Stage II
+            </span><span class="k">else</span>:
                 <span class="k">assert</span> <span class="">char</span><span class="">.</span><span class="">is-alphanumeric</span><span class="p">(</span><span class="p">)</span>
                 <span class="">char-seq</span> <span class="">=</span> <span class="">char</span> <span class="">+</span> <span class="">read-and-concatenate-alphanums</span><span class="p">(</span><span class="p">)</span>
                 <span class="nb">emit</span> <span class="">IDENTIFIER</span><span class="p">(</span><span class="">char-seq</span><span class="p">)</span>
 
-        <span class="c">#</span> <span class="c">Stage II: Parse the indented block-seq</span>
-        <span class="k">loop</span><span class="">:</span>
+        <span class="c">#</span><span class="c"> Stage II: Parse the indented block-seq
+        </span><span class="k">loop</span>:
             <span class="">N</span> <span class="">:=</span> <span class="">count-number-of-whitespaces</span><span class="p">(</span><span class="p">)</span>
-            <span class="k">if</span> <span class="">N</span> <span class="">=</span> <span class="">0</span><span class="">:</span>
-                <span class="nb">emit</span><span class="p">(</span><span class="">END</span><span class="p">)</span> <span class="k">and</span> <span class="">break</span> <span class="c">#</span> <span class="c">parse the next block</span>
-            <span class="k">else</span><span class="">:</span>
+            <span class="k">if</span> <span class="">N</span> <span class="">=</span> <span class="">0</span>:
+                <span class="nb">emit</span><span class="p">(</span><span class="">END</span><span class="p">)</span> <span class="k">and</span> <span class="">break</span> <span class="c">#</span><span class="c"> parse the next block
+            </span><span class="k">else</span>:
                 <span class="nb">emit</span> <span class="">INDENT</span>
-                <span class="c">#</span> <span class="c">invoke new instance of this subroutine;
+                <span class="c">#</span><span class="c"> invoke new instance of this subroutine;
                   the 'char-generator' block defines the generator
                   which feeds characters to this new instance,
                   and the 'capture' block defines what to do when
-                  the new instance emits a token</span>
-                <span class="">parse-block-seq</span><span class="p">(</span><span class="p">)</span><span class="">:</span>
-                    <span class="nb">char-generator</span><span class="">:</span>
-                        <span class="">for-each-line</span><span class="">:</span>
+                  the new instance emits a token
+                </span><span class="">parse-block-seq</span><span class="p">(</span><span class="p">)</span>:
+                    <span class="nb">char-generator</span>:
+                        <span class="">for-each-line</span>:
                             <span class="">W</span> <span class="">:=</span> <span class="">count-leading-whitespace-up-to</span><span class="p">(</span><span class="">N</span><span class="p">)</span>
-                            <span class="c">#</span> <span class="c">If this level received an EOF or the
-                              indentation level decreased below N:</span>
-                            <span class="k">if</span> <span class="">W</span> <span class="">=</span> <span class="">EOF</span> <span class="k">or</span> <span class="">W</span> <span class="">&lt;</span> <span class="">N</span><span class="">:</span>
+                            <span class="c">#</span><span class="c"> If this level received an EOF or the
+                              indentation level decreased below N:
+                            </span><span class="k">if</span> <span class="">W</span> <span class="">=</span> <span class="">EOF</span> <span class="k">or</span> <span class="">W</span> <span class="">&lt;</span> <span class="">N</span>:
                                 <span class="nb">yield</span> <span class="">EOF</span>
-                            <span class="k">else</span><span class="">:</span>
+                            <span class="k">else</span>:
                                 <span class="nb">yield</span> <span class="">all</span> <span class="">chars</span> <span class="">after</span> <span class="">the</span> <span class="">Nth</span>
-                    <span class="nb">capture</span> <span class="">token</span><span class="">:</span>
+                    <span class="nb">capture</span> <span class="">token</span>:
                         <span class="nb">emit</span> <span class="">token</span>
-                <span class="k">if</span> <span class="">W</span> <span class="">&gt;</span> <span class="">1</span><span class="">:</span> <span class="k">raise</span> <span class="">«Indentation Error»</span>
+                <span class="k">if</span> <span class="">W</span> <span class="">&gt;</span> <span class="">1</span>: <span class="k">raise</span> <span class="">«Indentation Error»</span>
                 <span class="nb">emit</span> <span class="">DEDENT</span>
                 <span class="nb">emit</span> <span class="">END</span>
 
@@ -336,6 +336,15 @@ END
 <!--<div class="related">-->
 <!--<h2>Related Posts</h2>-->
 <!--<ul class="related-posts">-->
+<!---->
+<!--<li>-->
+<!--<h3>-->
+<!--<a href="/2015/10/04/lexer-3.html">-->
+<!--Lexing III: More power!-->
+<!--<small>04 Oct 2015</small>-->
+<!--</a>-->
+<!--</h3>-->
+<!--</li>-->
 <!---->
 <!--<li>-->
 <!--<h3>-->
